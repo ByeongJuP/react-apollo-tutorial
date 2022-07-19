@@ -1,0 +1,18 @@
+$baseClassName: link;
+
+.#{$baseClassName} {
+  margin: 15px 0px;
+  &__wrapper {
+    &__desc,
+    &__url {
+      font-size: 20px;
+    }
+    &__desc {
+      margin-right: 10px;
+    }
+    &__url {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}

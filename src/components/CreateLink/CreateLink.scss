@@ -1,6 +1,13 @@
 $baseClassName: create-link;
 
 .#{$baseClassName} {
+  &__title {
+    margin: 10px 0px;
+    &__content {
+      font-size: 50px;
+      font-weight: bold;
+    }
+  }
   &__wrapper {
     margin-top: 20px;
     &__input {

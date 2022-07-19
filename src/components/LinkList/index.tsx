@@ -3,8 +3,10 @@ import Link from '../Link';
 import { LinkType } from '../../commons/type';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import './LinkList.scss';
 
 interface PropTypes {}
+const baseClassName = 'link-list';
 
 const FEED_QUERY = gql`
   {
@@ -34,7 +36,10 @@ const defaultLinkList: LinkType[] = [
 
 const LinkList: React.FC<PropTypes> = ({}) => {
   return (
-    <>
+    <div className={`${baseClassName}`}>
+      <div className={`${baseClassName}__title`}>
+        <span className={`${baseClassName}__title__content`}>Link List</span>
+      </div>
       <Query query={FEED_QUERY}>
         {({ data }: { data: any }) => {
           console.log(data);
@@ -49,7 +54,7 @@ const LinkList: React.FC<PropTypes> = ({}) => {
           );
         }}
       </Query>
-    </>
+    </div>
   );
 };
 

@@ -1,0 +1,11 @@
+$baseClassName: link-list;
+
+.#{$baseClassName} {
+  &__title {
+    margin: 10px 0px;
+    &__content {
+      font-size: 50px;
+      font-weight: bold;
+    }
+  }
+}
