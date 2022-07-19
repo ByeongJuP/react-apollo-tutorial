@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../logo.svg';
 import '../style/App.css';
+import CreateLink from './CreateLink';
 import LinkList from './LinkList';
 
 function App() {
@@ -11,6 +12,8 @@ function App() {
         <p>React-Apollo-graphQL Tutorial</p>
       </header>
       <LinkList />
+      <hr />
+      <CreateLink />
     </div>
   );
 }

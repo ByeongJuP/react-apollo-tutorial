@@ -38,7 +38,8 @@ const LinkList: React.FC<PropTypes> = ({}) => {
       <Query query={FEED_QUERY}>
         {({ data }: { data: any }) => {
           console.log(data);
-          const linksToRender: LinkType[] = data.feed.links;
+          if (!data) return <></>;
+          const linksToRender: LinkType[] = data.feed?.links;
           return (
             <div>
               {linksToRender.map((x, idx) => (
