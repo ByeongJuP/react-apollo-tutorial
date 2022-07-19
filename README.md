@@ -2,11 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Backend server
 
-In the project directory, you can run:
+- git repository url: `https://github.com/ByeongJuP/simple-apollo-graphql`
 
 # create-react-app
 
 - `npx create-react-app react-apollo-tutorial --template typescript`
 - `npm install node-sass --save`
+- `npm install apollo-boost react-apollo graphql`
+  - apollo-bost: `Apollo`클라이언트를 다루는데 필요 패키지 설치
+  - react-apollo: `React`에서 `Apollo`클라이언트를 사용하기 위한 바인딩 제공
