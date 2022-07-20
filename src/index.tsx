@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom';
 import './style/index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import { ApolloProvider } from 'react-apollo';
-import { ApolloClient } from 'apollo-client';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { createHttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 import { BrowserRouter } from 'react-router-dom';
 
 const httpLink = createHttpLink({
@@ -14,7 +12,7 @@ const httpLink = createHttpLink({
 });
 
 const client = new ApolloClient({
-  link: httpLink,
+  uri: 'http://localhost:8000',
   cache: new InMemoryCache()
 });
 

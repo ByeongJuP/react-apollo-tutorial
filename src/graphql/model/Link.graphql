@@ -1,0 +1,16 @@
+fragment linkField on Link {
+  id
+  description
+  url
+  createdAt
+}
+
+query feed($filter: String, $skip: Int, $take: Int, $orderBy: [LinkOrderByInput!]) {
+  feed(filter: $filter, skip: $skip, take: $take, orderBy: $orderBy) {
+    links {
+      ...linkField
+    }
+    count
+    id
+  }
+}
