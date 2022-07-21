@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { Mutation } from 'react-apollo';
+// import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import './CreateLink.scss';
-import { useHistory } from 'react-router';
 import { usePostMutation } from '../../graphql/generated/schema';
 
 interface PropTypes {}
@@ -24,13 +23,11 @@ const CreateLink: React.FC<PropTypes> = ({}) => {
   const [desc, setDesc] = useState<string>('');
   const descInputRef = useRef<HTMLInputElement>(null);
   const urlInputRef = useRef<HTMLInputElement>(null);
-  const history = useHistory();
 
   const [postLink] = usePostMutation({
-    variables: { description: desc, url },
     onCompleted() {
       alert('Link post complete.');
-      return history.push('/');
+      window.location.href = '/';
     },
     onError(e) {
       console.log(e.message);
