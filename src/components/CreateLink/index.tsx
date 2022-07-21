@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import './CreateLink.scss';
 import { useHistory } from 'react-router';
+import { usePostMutation } from '../../graphql/generated/schema';
 
 interface PropTypes {}
 const baseClassName = 'create-link';
@@ -19,9 +20,35 @@ const POST_MUTATION = gql`
 `;
 
 const CreateLink: React.FC<PropTypes> = ({}) => {
-  const [url, setUrl] = useState<string | null>(null);
-  const [desc, setDesc] = useState<string | null>(null);
+  const [url, setUrl] = useState<string>('');
+  const [desc, setDesc] = useState<string>('');
+  const descInputRef = useRef<HTMLInputElement>(null);
+  const urlInputRef = useRef<HTMLInputElement>(null);
   const history = useHistory();
+
+  const [postLink] = usePostMutation({
+    variables: { description: desc, url },
+    onCompleted() {
+      alert('Link post complete.');
+      return history.push('/');
+    },
+    onError(e) {
+      console.log(e.message);
+      alert('Error! check error message in console.');
+    }
+  });
+
+  const verifyPostData = () => {
+    if (!url || url.length < 1) {
+      descInputRef.current!.focus();
+      return alert('cannot enter empty url');
+    } else if (!desc || url.length < 1) {
+      urlInputRef.current!.focus();
+      return alert('cannot enter empty description');
+    }
+
+    postLink({ variables: { description: desc, url } });
+  };
 
   return (
     <div className={`${baseClassName}`}>
@@ -34,6 +61,7 @@ const CreateLink: React.FC<PropTypes> = ({}) => {
           <input
             className={`${baseClassName}__wrapper__input__content`}
             type="text"
+            ref={descInputRef}
             onChange={(e) => {
               setDesc(e.target.value);
             }}
@@ -45,6 +73,7 @@ const CreateLink: React.FC<PropTypes> = ({}) => {
           <input
             className={`${baseClassName}__wrapper__input__content`}
             type="text"
+            ref={urlInputRef}
             onChange={(e) => {
               setUrl(e.target.value);
             }}
@@ -52,22 +81,9 @@ const CreateLink: React.FC<PropTypes> = ({}) => {
           />
         </div>
       </div>
-      <Mutation mutation={POST_MUTATION} variables={{ description: desc, url }} onCompleted={() => history.push('/')}>
-        {(postMutation: any) => (
-          <button
-            className={`${baseClassName}__btn`}
-            onClick={() => {
-              if (!url || url.length < 1) {
-                return alert('cannot enter empty url');
-              } else if (!desc || url.length < 1) {
-                return alert('cannot enter empty description');
-              }
-              postMutation();
-            }}>
-            Add Link
-          </button>
-        )}
-      </Mutation>
+      <button className={`${baseClassName}__btn`} onClick={verifyPostData}>
+        Add Link
+      </button>
     </div>
   );
 };

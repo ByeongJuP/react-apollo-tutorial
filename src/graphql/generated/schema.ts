@@ -136,6 +136,14 @@ export type FeedQueryVariables = Exact<{
 
 export type FeedQuery = { __typename?: 'Query', feed: { __typename?: 'Feed', count: number, id?: string | null, links: Array<{ __typename?: 'Link', id: number, description: string, url: string, createdAt: any }> } };
 
+export type PostMutationVariables = Exact<{
+  description: Scalars['String'];
+  url: Scalars['String'];
+}>;
+
+
+export type PostMutation = { __typename?: 'Mutation', post: { __typename?: 'Link', id: number, description: string, url: string, createdAt: any } };
+
 export const LinkFieldFragmentDoc = gql`
     fragment linkField on Link {
   id
@@ -186,3 +194,37 @@ export function useFeedLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FeedQ
 export type FeedQueryHookResult = ReturnType<typeof useFeedQuery>;
 export type FeedLazyQueryHookResult = ReturnType<typeof useFeedLazyQuery>;
 export type FeedQueryResult = Apollo.QueryResult<FeedQuery, FeedQueryVariables>;
+export const PostDocument = gql`
+    mutation post($description: String!, $url: String!) {
+  post(description: $description, url: $url) {
+    ...linkField
+  }
+}
+    ${LinkFieldFragmentDoc}`;
+export type PostMutationFn = Apollo.MutationFunction<PostMutation, PostMutationVariables>;
+
+/**
+ * __usePostMutation__
+ *
+ * To run a mutation, you first call `usePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [postMutation, { data, loading, error }] = usePostMutation({
+ *   variables: {
+ *      description: // value for 'description'
+ *      url: // value for 'url'
+ *   },
+ * });
+ */
+export function usePostMutation(baseOptions?: Apollo.MutationHookOptions<PostMutation, PostMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<PostMutation, PostMutationVariables>(PostDocument, options);
+      }
+export type PostMutationHookResult = ReturnType<typeof usePostMutation>;
+export type PostMutationResult = Apollo.MutationResult<PostMutation>;
+export type PostMutationOptions = Apollo.BaseMutationOptions<PostMutation, PostMutationVariables>;

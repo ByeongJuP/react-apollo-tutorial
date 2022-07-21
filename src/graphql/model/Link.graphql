@@ -14,3 +14,9 @@ query feed($filter: String, $skip: Int, $take: Int, $orderBy: [LinkOrderByInput!
     id
   }
 }
+
+mutation post($description: String!, $url: String!) {
+  post(description: $description, url: $url) {
+    ...linkField
+  }
+}
