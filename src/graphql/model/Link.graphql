@@ -20,3 +20,9 @@ mutation post($description: String!, $url: String!) {
     ...linkField
   }
 }
+
+mutation delete($id: Int!) {
+  delete(id: $id) {
+    ...linkField
+  }
+}

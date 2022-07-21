@@ -1,5 +1,6 @@
 import React from 'react';
 import { LinkType } from '../../commons/type/index';
+import { useDeleteMutation } from '../../graphql/generated/schema';
 import './Link.scss';
 
 interface PropTypes {
@@ -9,6 +10,24 @@ interface PropTypes {
 const baseClassName = 'link';
 
 const Link: React.FC<PropTypes> = ({ link }) => {
+  const [deleteLink] = useDeleteMutation({
+    onCompleted() {
+      alert('Delete is success');
+      window.location.reload();
+    },
+    onError(e) {
+      console.log(e.message);
+      return alert('Error! check error message in console.');
+    }
+  });
+  const deleteLinkFn = () => {
+    const confirm = window.confirm(`Delete '${link.description}'?`);
+
+    if (!confirm) {
+      return false;
+    }
+    deleteLink({ variables: { id: Number(link.id) } });
+  };
   return (
     <div className={`${baseClassName}`}>
       <div className={`${baseClassName}__wrapper`}>
@@ -23,6 +42,9 @@ const Link: React.FC<PropTypes> = ({ link }) => {
             }
           }}>{`${link.url}`}</a>
         <span>)</span>
+        <span className={`${baseClassName}__wrapper__btn`} onClick={deleteLinkFn}>
+          ❌
+        </span>
       </div>
     </div>
   );

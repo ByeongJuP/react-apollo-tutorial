@@ -14,5 +14,9 @@ $baseClassName: link;
       cursor: pointer;
       text-decoration: underline;
     }
+    &__btn {
+      margin-left: 10px;
+      cursor: pointer;
+    }
   }
 }
