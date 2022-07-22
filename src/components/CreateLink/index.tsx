@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
 // import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import './CreateLink.scss';
 import { usePostMutation } from '../../graphql/generated/schema';
+import LinkInputForm from '../LinkInputForm';
+import './CreateLink.scss';
 
 interface PropTypes {}
 const baseClassName = 'create-link';
@@ -52,7 +53,8 @@ const CreateLink: React.FC<PropTypes> = ({}) => {
       <div className={`${baseClassName}__title`}>
         <span className={`${baseClassName}__title__content`}>Create Link</span>
       </div>
-      <div className={`${baseClassName}__wrapper`}>
+      <LinkInputForm url={url} setUrl={setUrl} desc={desc} setDesc={setDesc} />
+      {/* <div className={`${baseClassName}__wrapper`}>
         <div className={`${baseClassName}__wrapper__input`}>
           <span className={`${baseClassName}__wrapper__input__title`}>Descriptoin : </span>
           <input
@@ -77,7 +79,7 @@ const CreateLink: React.FC<PropTypes> = ({}) => {
             placeholder="The URL for the link"
           />
         </div>
-      </div>
+      </div> */}
       <button className={`${baseClassName}__btn`} onClick={verifyPostData}>
         Add Link
       </button>

@@ -5,6 +5,7 @@ import '../style/App.css';
 import CreateLink from './CreateLink';
 import Header from './Header';
 import LinkList from './LinkList';
+import UpdateLink from './UpdateLink';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Switch>
           <Route path="/" component={LinkList} exact />
           <Route path="/create" component={CreateLink} exact />
+          <Route path="/update" component={UpdateLink} exact />
         </Switch>
       </div>
     </div>
