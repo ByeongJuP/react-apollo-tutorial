@@ -54,32 +54,6 @@ const CreateLink: React.FC<PropTypes> = ({}) => {
         <span className={`${baseClassName}__title__content`}>Create Link</span>
       </div>
       <LinkInputForm url={url} setUrl={setUrl} desc={desc} setDesc={setDesc} />
-      {/* <div className={`${baseClassName}__wrapper`}>
-        <div className={`${baseClassName}__wrapper__input`}>
-          <span className={`${baseClassName}__wrapper__input__title`}>Descriptoin : </span>
-          <input
-            className={`${baseClassName}__wrapper__input__content`}
-            type="text"
-            ref={descInputRef}
-            onChange={(e) => {
-              setDesc(e.target.value);
-            }}
-            placeholder="A description for the link"
-          />
-        </div>
-        <div className={`${baseClassName}__wrapper__input`}>
-          <span className={`${baseClassName}__wrapper__input__title`}>Url : </span>
-          <input
-            className={`${baseClassName}__wrapper__input__content`}
-            type="text"
-            ref={urlInputRef}
-            onChange={(e) => {
-              setUrl(e.target.value);
-            }}
-            placeholder="The URL for the link"
-          />
-        </div>
-      </div> */}
       <button className={`${baseClassName}__btn`} onClick={verifyPostData}>
         Add Link
       </button>
