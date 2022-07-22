@@ -37,10 +37,10 @@ const CreateLink: React.FC<PropTypes> = ({}) => {
   });
 
   const verifyPostData = () => {
-    if (!url || url.length < 1) {
+    if (!url || url.length < 1 || !urlInputRef.current!.value.length) {
       descInputRef.current!.focus();
       return alert('cannot enter empty url');
-    } else if (!desc || url.length < 1) {
+    } else if (!desc || url.length < 1 || !descInputRef.current!.value.length) {
       urlInputRef.current!.focus();
       return alert('cannot enter empty description');
     }
@@ -53,7 +53,14 @@ const CreateLink: React.FC<PropTypes> = ({}) => {
       <div className={`${baseClassName}__title`}>
         <span className={`${baseClassName}__title__content`}>Create Link</span>
       </div>
-      <LinkInputForm url={url} setUrl={setUrl} desc={desc} setDesc={setDesc} />
+      <LinkInputForm
+        url={url}
+        setUrl={setUrl}
+        desc={desc}
+        setDesc={setDesc}
+        descInputRef={descInputRef}
+        urlInputRef={urlInputRef}
+      />
       <button className={`${baseClassName}__btn`} onClick={verifyPostData}>
         Add Link
       </button>

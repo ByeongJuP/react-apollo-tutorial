@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import './LinkInputForm.scss';
 
 interface PropTypes {
@@ -6,14 +6,13 @@ interface PropTypes {
   setUrl: Function;
   desc: string;
   setDesc: Function;
+  descInputRef: any;
+  urlInputRef: any;
 }
 
 const baseClassName = 'link-input-from';
 
-const LinkInputForm: React.FC<PropTypes> = ({ url, setUrl, desc, setDesc }) => {
-  const descInputRef = useRef<HTMLInputElement>(null);
-  const urlInputRef = useRef<HTMLInputElement>(null);
-
+const LinkInputForm: React.FC<PropTypes> = ({ url, setUrl, desc, setDesc, descInputRef, urlInputRef }) => {
   return (
     <div className={`${baseClassName}`}>
       <div className={`${baseClassName}__desc`}>
