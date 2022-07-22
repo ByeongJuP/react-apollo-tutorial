@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import { LinkType } from '../../commons/type/index';
 import { useDeleteMutation } from '../../graphql/generated/schema';
 import './Link.scss';
@@ -10,6 +11,8 @@ interface PropTypes {
 const baseClassName = 'link';
 
 const Link: React.FC<PropTypes> = ({ link }) => {
+  const history = useHistory();
+
   const [deleteLink] = useDeleteMutation({
     onCompleted() {
       alert('Delete is success');
@@ -45,6 +48,12 @@ const Link: React.FC<PropTypes> = ({ link }) => {
         <span className={`${baseClassName}__wrapper__btn`} onClick={deleteLinkFn}>
           ❌
         </span>
+        <button
+          onClick={() => {
+            history.push({ pathname: '/update', state: { link } });
+          }}>
+          Link edit
+        </button>
       </div>
     </div>
   );

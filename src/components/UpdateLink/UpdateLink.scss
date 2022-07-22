@@ -1,8 +1,8 @@
-$baseClassName: create-link;
+$baseClassName: update-link;
 
 .#{$baseClassName} {
   &__title {
-    margin: 10px 0px;
+    margin: 10px 0px 20px 0px;
     &__content {
       font-size: 50px;
       font-weight: bold;
@@ -10,7 +10,7 @@ $baseClassName: create-link;
   }
   &__btn {
     height: 30px;
-    width: 100px;
+    width: 200px;
     cursor: pointer;
   }
 }
