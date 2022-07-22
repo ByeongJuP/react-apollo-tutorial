@@ -3,6 +3,8 @@ $baseClassName: link;
 .#{$baseClassName} {
   margin: 15px 0px;
   &__wrapper {
+    display: inline-block;
+    margin-right: 10px;
     &__desc,
     &__url {
       font-size: 20px;
@@ -18,5 +20,9 @@ $baseClassName: link;
       margin-left: 10px;
       cursor: pointer;
     }
+  }
+  &__emoji {
+    margin-right: 10px;
+    cursor: pointer;
   }
 }

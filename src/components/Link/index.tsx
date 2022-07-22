@@ -36,25 +36,27 @@ const Link: React.FC<PropTypes> = ({ link }) => {
       <div className={`${baseClassName}__wrapper`}>
         <span className={`${baseClassName}__wrapper__desc`}>{link.description}</span>
         <span>(</span>
-        <a
+        <span
           className={`${baseClassName}__wrapper__url`}
           onClick={() => {
             if (!!link.url) {
               const hasHttp = !link.url.split('http')[0];
               hasHttp ? window.open(link.url, '_blank') : window.open('http://' + link.url, '_blank');
             }
-          }}>{`${link.url}`}</a>
+          }}>{`${link.url}`}</span>
         <span>)</span>
-        <span className={`${baseClassName}__wrapper__btn`} onClick={deleteLinkFn}>
-          ❌
-        </span>
-        <button
-          onClick={() => {
-            history.push({ pathname: '/update', state: { link } });
-          }}>
-          Link edit
-        </button>
       </div>
+      <span className={`${baseClassName}__emoji`} onClick={deleteLinkFn} title="삭제">
+        ❌
+      </span>
+      <span
+        className={`${baseClassName}__emoji`}
+        onClick={() => {
+          history.push({ pathname: '/update', state: { link } });
+        }}
+        title="수정">
+        📝
+      </span>
     </div>
   );
 };
