@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { LinkType } from '../../commons/type';
 import { useLocation } from 'react-router';
 import LinkInputForm from '../LinkInputForm';
+import { useUpdateMutation } from '../../graphql/generated/schema';
 import './UpdateLink.scss';
 
 interface PropTypes {}
@@ -9,6 +10,7 @@ interface PropTypes {}
 const baseClassName = 'update-link';
 
 const UpdateLink: React.FC<PropTypes> = ({}) => {
+  const [id, setId] = useState<Partial<number>>();
   const [url, setUrl] = useState<string>('');
   const [desc, setDesc] = useState<string>('');
   const location = useLocation<any>();
@@ -16,11 +18,23 @@ const UpdateLink: React.FC<PropTypes> = ({}) => {
   const descInputRef = useRef<HTMLInputElement>(null);
   const urlInputRef = useRef<HTMLInputElement>(null);
 
+  const [updateLink] = useUpdateMutation({
+    onCompleted() {
+      alert('Link Update Success');
+      window.location.href = '/';
+    },
+    onError(e) {
+      console.log(e.message);
+      alert('Error! chck error message in console.');
+    }
+  });
+
   useEffect(() => {
     if (!!location.state.link) {
       const link: LinkType = location.state.link;
       setUrl(link.url);
       setDesc(link.description || '');
+      setId(Number(link.id));
     }
   }, [location]);
 
@@ -32,6 +46,8 @@ const UpdateLink: React.FC<PropTypes> = ({}) => {
       urlInputRef.current!.focus();
       return alert('cannot enter empty description');
     }
+
+    updateLink({ variables: { id: id!, description: desc, url } });
   };
   return (
     <div className={`${baseClassName}`}>

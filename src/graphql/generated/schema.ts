@@ -151,6 +151,15 @@ export type DeleteMutationVariables = Exact<{
 
 export type DeleteMutation = { __typename?: 'Mutation', delete?: { __typename?: 'Link', id: number, description: string, url: string, createdAt: any } | null };
 
+export type UpdateMutationVariables = Exact<{
+  id: Scalars['Int'];
+  description?: InputMaybe<Scalars['String']>;
+  url?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type UpdateMutation = { __typename?: 'Mutation', update?: { __typename?: 'Link', id: number, description: string, url: string, createdAt: any } | null };
+
 export const LinkFieldFragmentDoc = gql`
     fragment linkField on Link {
   id
@@ -268,3 +277,38 @@ export function useDeleteMutation(baseOptions?: Apollo.MutationHookOptions<Delet
 export type DeleteMutationHookResult = ReturnType<typeof useDeleteMutation>;
 export type DeleteMutationResult = Apollo.MutationResult<DeleteMutation>;
 export type DeleteMutationOptions = Apollo.BaseMutationOptions<DeleteMutation, DeleteMutationVariables>;
+export const UpdateDocument = gql`
+    mutation update($id: Int!, $description: String, $url: String) {
+  update(id: $id, description: $description, url: $url) {
+    ...linkField
+  }
+}
+    ${LinkFieldFragmentDoc}`;
+export type UpdateMutationFn = Apollo.MutationFunction<UpdateMutation, UpdateMutationVariables>;
+
+/**
+ * __useUpdateMutation__
+ *
+ * To run a mutation, you first call `useUpdateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateMutation, { data, loading, error }] = useUpdateMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      description: // value for 'description'
+ *      url: // value for 'url'
+ *   },
+ * });
+ */
+export function useUpdateMutation(baseOptions?: Apollo.MutationHookOptions<UpdateMutation, UpdateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateMutation, UpdateMutationVariables>(UpdateDocument, options);
+      }
+export type UpdateMutationHookResult = ReturnType<typeof useUpdateMutation>;
+export type UpdateMutationResult = Apollo.MutationResult<UpdateMutation>;
+export type UpdateMutationOptions = Apollo.BaseMutationOptions<UpdateMutation, UpdateMutationVariables>;

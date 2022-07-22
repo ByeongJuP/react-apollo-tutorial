@@ -26,3 +26,9 @@ mutation delete($id: Int!) {
     ...linkField
   }
 }
+
+mutation update($id: Int!, $description: String, $url: String) {
+  update(id: $id, description: $description, url: $url) {
+    ...linkField
+  }
+}
