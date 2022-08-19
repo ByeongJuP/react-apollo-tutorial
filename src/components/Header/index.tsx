@@ -16,6 +16,14 @@ const Header: React.FC<PrpoTypes> = ({}) => {
         <Link to="/create" className="ml1 no-underline black">
           NEW
         </Link>
+        <div className="ml1">|</div>
+        <Link to="/signUp" className="ml1 no-underline black">
+          SignUp
+        </Link>
+        <div className="ml1">|</div>
+        <Link to="/signIn" className="ml1 no-underline black">
+          SignIn
+        </Link>
       </div>
     </div>
   );
