@@ -160,7 +160,7 @@ export type UpdateMutationVariables = Exact<{
 
 export type UpdateMutation = { __typename?: 'Mutation', update?: { __typename?: 'Link', id: number, description: string, url: string, createdAt: any } | null };
 
-export type UserFieldFragment = { __typename?: 'User', name: string, email: string };
+export type UserFieldFragment = { __typename?: 'User', id: number, name: string, email: string };
 
 export type SignupMutationVariables = Exact<{
   name: Scalars['String'];
@@ -169,7 +169,7 @@ export type SignupMutationVariables = Exact<{
 }>;
 
 
-export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'AuthPayload', token: string, user: { __typename?: 'User', name: string, email: string } } };
+export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'AuthPayload', token: string, user: { __typename?: 'User', id: number, name: string, email: string } } };
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -177,7 +177,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthPayload', token: string, user: { __typename?: 'User', name: string, email: string } } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'AuthPayload', token: string, user: { __typename?: 'User', id: number, name: string, email: string } } };
 
 export const LinkFieldFragmentDoc = gql`
     fragment linkField on Link {
@@ -189,6 +189,7 @@ export const LinkFieldFragmentDoc = gql`
     `;
 export const UserFieldFragmentDoc = gql`
     fragment userField on User {
+  id
   name
   email
 }

@@ -1,4 +1,5 @@
 fragment userField on User {
+  id
   name
   email
 }
