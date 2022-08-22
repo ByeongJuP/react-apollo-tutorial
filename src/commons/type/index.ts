@@ -5,8 +5,8 @@ export type LinkType = {
 };
 
 export type SingUpType = {
-  name: String;
-  email: String;
-  firstPassword: String;
-  secondPassword: String;
+  name: string;
+  email: string;
+  firstPassword: string;
+  secondPassword: string;
 };

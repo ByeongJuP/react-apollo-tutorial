@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { SingUpType } from '../../commons/type';
 import { regEmail } from '../../commons/util';
+import { useSignupMutation } from '../../graphql/generated/schema';
 import './SignUp.scss';
 
 interface PropTypes {}
@@ -17,14 +18,28 @@ const SingUp: React.FC<PropTypes> = () => {
     setFocus,
     formState: { errors }
   } = useForm<SingUpType>();
+
   const onSubmit: SubmitHandler<SingUpType> = (data) => {
-    console.log(data);
     if (data.firstPassword !== data.secondPassword) {
       setError('secondPassword', { type: 'custom', message: 'password is not match' });
       setFocus('secondPassword');
     }
+
+    if (!!errors) {
+      createUser({ variables: { name: data.name, email: data.email, password: data.firstPassword } });
+    }
   };
 
+  const [createUser] = useSignupMutation({
+    onCompleted() {
+      alert('SignUp is success!');
+      window.location.href = '/signin';
+    },
+    onError(e) {
+      alert('Sign up is fail');
+      console.log(e.message);
+    }
+  });
   return (
     <div className={`${baseClassName}`}>
       <h2 className={`${baseClassName}__header`}>Sign Up</h2>
