@@ -1,0 +1,30 @@
+$baseClassName: sign-in;
+
+.#{$baseClassName} {
+  &__wrapper {
+    margin-bottom: 20px;
+    &__title {
+      display: inline-block;
+      margin-right: 10px;
+      width: 130px;
+      text-align: right;
+    }
+    &__input {
+      height: 50px;
+      width: 250px;
+    }
+    &__error {
+      margin-left: 130px;
+      color: red;
+      display: block;
+    }
+    &__btn {
+      height: 50px;
+      width: 100px;
+      background-color: blue;
+      border-radius: 5px;
+      border-color: blue;
+      color: white;
+    }
+  }
+}

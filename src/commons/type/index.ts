@@ -10,3 +10,8 @@ export type SingUpType = {
   firstPassword: string;
   secondPassword: string;
 };
+
+export type SignInType = {
+  email: string;
+  password: string;
+};
