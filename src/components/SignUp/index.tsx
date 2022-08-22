@@ -15,7 +15,6 @@ const SingUp: React.FC<PropTypes> = () => {
     handleSubmit,
     setError,
     setFocus,
-    watch,
     formState: { errors }
   } = useForm<SingUpType>();
   const onSubmit: SubmitHandler<SingUpType> = (data) => {
@@ -25,17 +24,6 @@ const SingUp: React.FC<PropTypes> = () => {
       setFocus('secondPassword');
     }
   };
-  console.log(errors);
-  // useEffect(() => {
-  //   const firstError = (Object.keys(errors) as Array<keyof typeof errors>).reduce<keyof typeof errors | null>((field, a) => {
-  //     const fieldKey = field as keyof typeof errors;
-  //     return !!errors[fieldKey] ? fieldKey : a;
-  //   }, null);
-
-  //   if (firstError) {
-  //     setFocus(firstError);
-  //   }
-  // }, [errors, setFocus]);
 
   return (
     <div className={`${baseClassName}`}>
