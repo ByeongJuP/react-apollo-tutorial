@@ -1,5 +1,4 @@
-import { spawn } from 'child_process';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { SingUpType } from '../../commons/type';
 import { regEmail } from '../../commons/util';
