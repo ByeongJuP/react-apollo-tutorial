@@ -6,11 +6,12 @@ import './Link.scss';
 
 interface PropTypes {
   link: LinkType;
+  isLogin: boolean;
 }
 
 const baseClassName = 'link';
 
-const Link: React.FC<PropTypes> = ({ link }) => {
+const Link: React.FC<PropTypes> = ({ link, isLogin }) => {
   const history = useHistory();
 
   const [deleteLink] = useDeleteMutation({
@@ -46,17 +47,21 @@ const Link: React.FC<PropTypes> = ({ link }) => {
           }}>{`${link.url}`}</span>
         <span>)</span>
       </div>
-      <span className={`${baseClassName}__emoji`} onClick={deleteLinkFn} title="삭제">
-        ❌
-      </span>
-      <span
-        className={`${baseClassName}__emoji`}
-        onClick={() => {
-          history.push({ pathname: '/update', state: { link } });
-        }}
-        title="수정">
-        📝
-      </span>
+      {isLogin && (
+        <>
+          <span className={`${baseClassName}__emoji`} onClick={deleteLinkFn} title="삭제">
+            ❌
+          </span>
+          <span
+            className={`${baseClassName}__emoji`}
+            onClick={() => {
+              history.push({ pathname: '/update', state: { link } });
+            }}
+            title="수정">
+            📝
+          </span>
+        </>
+      )}
     </div>
   );
 };

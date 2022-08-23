@@ -1,12 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import { deleteUserSession, isLogin, userInfo } from '../../commons/util';
+import { deleteUserSession, loginState, userInfo } from '../../commons/util';
 
 interface PrpoTypes {}
 
 const Header: React.FC<PrpoTypes> = ({}) => {
-  const loginState = isLogin();
+  const isLogin = loginState();
   const getUserInfo = userInfo();
   return (
     <div className="flex pa1 justify-between nowrap orange">
@@ -19,7 +19,7 @@ const Header: React.FC<PrpoTypes> = ({}) => {
           NEW
         </Link>
         <div className="ml1">|</div>
-        {loginState ? (
+        {isLogin ? (
           <span
             className="ml1 no-underline black"
             style={{ cursor: 'pointer' }}
